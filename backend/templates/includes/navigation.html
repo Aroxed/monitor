@@ -30,15 +30,6 @@
               <a href="#" onclick="document.querySelector('#logout-form').submit()"><span class="d-sm-inline d-none me-3">Logout</span></a>
             </form>
           </li>
-          <li class="nav-item d-flex align-items-center">
-            {% if request.user.is_superuser %}
-            <a href="{% url 'admin:password_change' %}" class="nav-link text-body font-weight-bold px-0">
-            {% else %}
-            <a href="{% url 'password_change' %}" class="nav-link text-body font-weight-bold px-0">
-            {% endif %}
-              <span class="d-sm-inline d-none me-3">Change Password</span>
-            </a>
-          </li>
         {% else %}
           <li class="nav-item d-flex align-items-center">
             <a href="{% url 'login' %}" class="nav-link text-body font-weight-bold px-0">

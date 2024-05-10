@@ -1,0 +1,196 @@
+{% extends "layouts/base.html" %}
+{% load i18n static mo_tags %}
+
+{% block title %} Monitoring Object {% endblock title %}
+
+{% block content %}
+    <div class="container-fluid py-4">
+        <h5> {{ mo.address }}</h5>
+        <div class="row">
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-header pb-0">
+                        <h6>The latest alerts</h6>
+                    </div>
+
+                    <div class="card-body p-3">
+                        {% for warning in temperature_warning %}
+                            <div class="alert alert-warning alert-dismissible text-white" role="alert">
+                                <span class="text-sm"><b>Temperature</b> value is beyond the normal range
+                                    [{{ warning.sensor.normal_min }}, {{ warning.sensor.normal_max }}]: {{ warning.value }}
+                                    on {{ warning.timestamp }}
+                                </span>
+                                <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                        {% for warning in humidity_warning %}
+                            <div class="alert alert-warning alert-dismissible text-white" role="alert">
+                                <span class="text-sm"><b>Humidity</b> value is beyond the normal range
+                                    [{{ warning.sensor.normal_min }}, {{ warning.sensor.normal_max }}]: {{ warning.value }}
+                                    on {{ warning.timestamp }}
+                                </span>
+                                <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="row">
+        <div class="col-4">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>The latest LIFT states</h6>
+                </div>
+                {% for temp in lift %}
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            <div class="timeline-block">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold p-0 m-0">
+                                        <p class="m-0 p-0">Current Level: <b>{{ temp.current_level }}</b>,
+                                            Current Level: <b>{{ temp.current_state }}</b></p>
+                                        <p>Passenger in Lift: <b>{{ temp.is_passenger_in_lift|yesno }}</b>,
+                                            Doors open: <b>{{ temp.are_doors_open|yesno }}</b></p>
+                                    </h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ temp.timestamp }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>The latest TEMPERATURE readings</h6>
+                </div>
+                {% for temp in temperature %}
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            <div class="timeline-block">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">
+                                        Value: {{ temp.value|to_int }}</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ temp.timestamp }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>The latest HUMIDITY readings</h6>
+                </div>
+                {% for temp in humidity %}
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            <div class="timeline-block">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">
+                                        Value: {{ temp.value|to_int }}</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ temp.timestamp }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-4">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>The latest GAS readings</h6>
+                </div>
+                {% for temp in gas %}
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            <div class="timeline-block">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">
+                                        Value: {{ temp.value|to_int }}</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ temp.timestamp }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>The latest WATER readings</h6>
+                </div>
+                {% for temp in water %}
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            <div class="timeline-block">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">
+                                        Value: {{ temp.value|to_int }}</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ temp.timestamp }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>The latest ELECTRICITY readings</h6>
+                </div>
+                {% for temp in electricity %}
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            <div class="timeline-block">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">
+                                        Value: {{ temp.value|to_int }}</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ temp.timestamp }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock content %}
