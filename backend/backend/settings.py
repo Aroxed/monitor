@@ -141,3 +141,6 @@ EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+account_sid = env.str('account_sid')
+auth_token = env.str('auth_token')
