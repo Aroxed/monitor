@@ -1,5 +1,7 @@
 from datetime import timedelta
 
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db.models import F, Q
 from django.db.models import Sum
 from django.http import HttpResponse, JsonResponse
@@ -78,11 +80,11 @@ def button_statistics(request):
     for day in range(7):
         current_day = start_of_week + timedelta(days=day)
         lifts_not_working = LiftSensorEvent.objects.filter(
-            timestamp__range=(current_day,current_day),
+            timestamp__range=(current_day, current_day),
             current_state='failed'
         ).count()
         lifts_working = LiftSensorEvent.objects.filter(
-            timestamp__range=(current_day,current_day),
+            timestamp__range=(current_day, current_day),
             current_state='ok'
         ).count()
         active_lifts_list.append(lifts_working)
@@ -95,10 +97,10 @@ def button_statistics(request):
     for day in range(7):
         current_day = start_of_week + timedelta(days=day)
         events_count = (
-                LiftSensorEvent.objects.filter(timestamp__range=(current_day,current_day),).count() +
-                SensorReading.objects.filter(timestamp__range=(current_day,current_day),).count() +
-                SensorStatus.objects.filter(timestamp__range=(current_day,current_day),).count() +
-                SensorFluidLevel.objects.filter(timestamp__range=(current_day,current_day),).count()
+                LiftSensorEvent.objects.filter(timestamp__range=(current_day, current_day), ).count() +
+                SensorReading.objects.filter(timestamp__range=(current_day, current_day), ).count() +
+                SensorStatus.objects.filter(timestamp__range=(current_day, current_day), ).count() +
+                SensorFluidLevel.objects.filter(timestamp__range=(current_day, current_day), ).count()
         )
         events_per_day.append(events_count)
     result['events_per_day'] = events_per_day
@@ -110,7 +112,8 @@ def button_statistics(request):
         current_day = start_of_week + timedelta(days=day)
         gas_sensor_ids = Sensor.objects.filter(sensor_type=sensor_type_gas).values_list('id', flat=True)
         gas_consumption = \
-            SensorReading.objects.filter(sensor_id__in=gas_sensor_ids, timestamp__range=(current_day,current_day)).aggregate(
+            SensorReading.objects.filter(sensor_id__in=gas_sensor_ids,
+                                         timestamp__range=(current_day, current_day)).aggregate(
                 Sum('value'))[
                 'value__sum']
         gas_consumption_per_day.append(gas_consumption or 0)
@@ -123,7 +126,8 @@ def button_statistics(request):
         current_day = start_of_week + timedelta(days=day)
         water_sensor_ids = Sensor.objects.filter(sensor_type=sensor_type_water).values_list('id', flat=True)
         water_consumption = \
-            SensorReading.objects.filter(sensor_id__in=water_sensor_ids, timestamp__range=(current_day,current_day)).aggregate(
+            SensorReading.objects.filter(sensor_id__in=water_sensor_ids,
+                                         timestamp__range=(current_day, current_day)).aggregate(
                 Sum('value'))['value__sum']
         water_consumption_per_day.append(water_consumption or 0)
     result['water_consumption_per_day'] = water_consumption_per_day
@@ -170,11 +174,18 @@ def monitoring_objects(request, id):
 
     return render(request, 'pages/mo.html', {'mo': mo, 'sensors': sensors,
                                              'temperature': temperature,
-                                             #'temperature_warning': temperature_warning,
-                                             #'humidity_warning': humidity_warning,
+                                             # 'temperature_warning': temperature_warning,
+                                             # 'humidity_warning': humidity_warning,
                                              'humidity': humidity,
                                              'gas': gas, 'water': water, 'lift': lift})
 
 
 def admin_index(request):
     return render(request, 'pages/index.html', {'segment': 'index'})
+
+
+def send_email(request):
+    send_mail("Hello from Django", "Hello from Django", settings.EMAIL_HOST_USER,
+              ['petrashenko@gmail.com'],
+              auth_password=settings.EMAIL_HOST_PASSWORD)
+    return HttpResponse('email sent')

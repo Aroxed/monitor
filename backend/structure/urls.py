@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (SensorTypeViewSet, MonitoringObjectViewSet, SensorViewSet, SensorReadingViewSet,
                     SensorStatusViewSet,
-                    generate, LiftSensorEventViewSet, button_statistics, monitoring_objects)
+                    generate, LiftSensorEventViewSet, button_statistics, monitoring_objects, send_email)
 
 router = DefaultRouter()
 router.register(r'sensor-types', SensorTypeViewSet)
@@ -17,5 +17,5 @@ urlpatterns = [
     path('generate', generate),
     path('button_statistics', button_statistics),
     path('mo/<int:id>', monitoring_objects),
-
+    path('send_email', send_email),
 ]
