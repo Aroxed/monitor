@@ -3,7 +3,6 @@ from twilio.rest import Client
 
 
 def send_sms_notification():
-    # Your Twilio Account SID and Auth Token
     account_sid = settings.account_sid
     auth_token = settings.auth_token
 
