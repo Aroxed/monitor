@@ -38,3 +38,4 @@ class LiftSensorEventAdmin(admin.ModelAdmin):
 
 
 admin.site.register(LiftSensorEvent, LiftSensorEventAdmin)
+

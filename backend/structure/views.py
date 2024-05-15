@@ -174,8 +174,8 @@ def monitoring_objects(request, id):
 
     return render(request, 'pages/mo.html', {'mo': mo, 'sensors': sensors,
                                              'temperature': temperature,
-                                             # 'temperature_warning': temperature_warning,
-                                             # 'humidity_warning': humidity_warning,
+                                             'temperature_warning': temperature_warning,
+                                             'humidity_warning': humidity_warning,
                                              'humidity': humidity,
                                              'gas': gas, 'water': water, 'lift': lift})
 
