@@ -20,7 +20,7 @@ EVENT_TYPES = {
 }
 
 # Define the number of events to generate in each iteration
-NUM_EVENTS = 5
+NUM_EVENTS = 15
 
 
 # Function to get a random sensor ID from the database
@@ -101,6 +101,6 @@ def generate_and_send_events(interval):
 
 # Start a thread for generating and sending events
 if __name__ == "__main__":
-    interval = 10  # seconds, adjust as needed
+    interval = 5  # seconds, adjust as needed
     event_thread = threading.Thread(target=generate_and_send_events, args=(interval,))
     event_thread.start()
