@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 # Install MongoDB client for Djongo
-RUN apt-get update && apt-get install -y \
-    mongodb-clients \
-    && apt-get clean
+#RUN apt-get update && apt-get install -y \
+#    mongodb-clients \
+#    && apt-get clean
 
 # Install Python dependencies
 COPY requirements.txt /app/
