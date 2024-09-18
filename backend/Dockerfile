@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
 # Install Python dependencies
 COPY requirements.txt /app/
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install -r ./requirements.txt
 
 # Copy the project files to the container
 COPY . /app/
