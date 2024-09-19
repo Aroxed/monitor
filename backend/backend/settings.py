@@ -131,8 +131,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 import environ
 
-env = environ.Env()
-environ.Env.read_env()  # reading .env file
+#env = environ.Env()
+#environ.Env.read_env()  # reading .env file
 
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_HOST = 'smtp.gmail.com'
