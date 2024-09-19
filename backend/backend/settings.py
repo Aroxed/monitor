@@ -142,5 +142,5 @@ environ.Env.read_env()  # reading .env file
 #EMAIL_USE_TLS = True
 #EMAIL_USE_SSL = False
 
-account_sid = env.str('account_sid')
-auth_token = env.str('auth_token')
+#account_sid = env.str('account_sid')
+#auth_token = env.str('auth_token')
