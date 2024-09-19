@@ -15,12 +15,12 @@ COPY /backend/. /app/
 # Set the working directory
 WORKDIR /app
 # Install MongoDB client for Djongo
-RUN apt-get update && apt-get install -y \
+#RUN apt-get update && apt-get install -y \
 #    mongodb-clients \
 #    && apt-get clean
 # Install Python dependencies
 RUN pip install --upgrade pip
-#RUN pip install --no-cache-dir -r requirements.txt  # Saves space preventing package cacheing
+RUN pip install --no-cache-dir -r requirements.txt  # Saves space preventing package cacheing
 # Expose port 8000 for the Django application
 EXPOSE 8000
 # Run Django development server
