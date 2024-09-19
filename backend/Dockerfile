@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
 # Create workdir and copy files
 RUN mkdir app
-COPY . /app/
+COPY /backend/. /app/
 # Set the working directory
 WORKDIR /app
 # Install MongoDB client for Djongo
