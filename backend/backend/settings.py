@@ -134,13 +134,13 @@ import environ
 env = environ.Env()
 environ.Env.read_env()  # reading .env file
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+#EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+#EMAIL_USE_SSL = False
 
 account_sid = env.str('account_sid')
 auth_token = env.str('auth_token')
