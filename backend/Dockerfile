@@ -22,6 +22,6 @@ WORKDIR /app
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt  # Saves space preventing package cacheing
 # Expose port 8000 for the Django application
-EXPOSE 8000
+EXPOSE 80
 # Run Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
