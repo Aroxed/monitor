@@ -15,7 +15,7 @@ COPY /backend/. /app/
 # Set the working directory
 WORKDIR /app
 # Install MongoDB client for Djongo
-#RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
 #    mongodb-clients \
 #    && apt-get clean
 # Install Python dependencies
